@@ -1,7 +1,7 @@
 class Solution {
 public:
     const int m =1e9 + 7;
-    int findPower(long long a, long long b){
+    long long findPower(long long a, long long b){
         if(b == 0) return 1;
 
         long long  half  = findPower(a, b/2);
