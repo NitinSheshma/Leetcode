@@ -1,24 +1,23 @@
 class Solution {
 public:
-    vector<vector<int>> result;
-
-    void backtrack(vector<int>& nums, int start) {
-        // Base case: if we've placed all numbers
-        if(start == nums.size()) {
-            result.push_back(nums);
+    void solve(vector<int> nums, vector<vector<int>> &ans, int index){
+        //base case
+        if(index >= nums.size()){
+            ans.push_back(nums);
             return;
+        }// start the index 
+        for(int i=index; i<nums.size(); i++){
+            swap(nums[index], nums[i]);
+            solve(nums, ans, index+1);
+            //backtrack
+            swap(nums[index], nums[i]);
         }
 
-        // Swap each element to the 'start' position
-        for(int i = start; i < nums.size(); i++) {
-            swap(nums[start], nums[i]);         // choose
-            backtrack(nums, start + 1);         // explore
-            swap(nums[start], nums[i]);         // un-choose (backtrack)
-        }
     }
-
     vector<vector<int>> permute(vector<int>& nums) {
-        backtrack(nums, 0);
-        return result;
+        vector<vector<int >> ans;
+        int index =0;
+        solve(nums, ans, index);
+        return ans;
     }
 };
