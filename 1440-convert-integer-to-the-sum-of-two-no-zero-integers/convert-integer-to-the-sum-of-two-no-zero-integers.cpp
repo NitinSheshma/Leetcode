@@ -1,20 +1,20 @@
 class Solution {
 public:
-    bool check(int x){
-        while(x>0){
-            if(x%10 ==0) return false;
-            x /=10;
-        }
-        return true;
-    }
-    
     vector<int> getNoZeroIntegers(int n) {
-        for(int a=1; a<=n-1; a++){
-            int b =n-a;
-            if(check(a) && check(b)){
-                return{a,b};
+        int a = n;
+        int b  = 0;
+        int value = 1;
+        //a+b ==n
+        while(n>1){
+            int take =1;
+            if(n%2==1){
+                take =2;
             }
+            a = a-take*value;
+            b = b+take * value;
+            n= (n-take)/10;
+            value *= 10;
         }
-        return{};
+        return{a,b};
     }
 };
